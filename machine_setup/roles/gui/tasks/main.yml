@@ -1,0 +1,52 @@
+# for machines with media capabilities
+
+  - name: install xorg-server
+    package:
+         name: xorg-server
+         state: latest
+
+  - name: install kde plasma-desktop
+    package:
+         name: plasma-desktop
+         state: latest
+
+  - name: install simple display manager for graphical logins
+    package:
+         name: sddm
+         state: latest
+
+  - name: install xorg-xinit
+    package:
+         name: xorg-xinit
+         state: latest
+
+  - name: install firefox
+    package:
+          name: firefox
+          state: latest
+
+  - name: install terminator console emulator
+    package:
+           name: terminator
+           state: latest
+
+  - name: install pulseaudio
+    package:
+           name: pulseaudio
+           state: latest
+ 
+  - name: install kmix volume control plugin
+    package:
+           name: kmix
+           state: latest
+ 
+  - name: install gvim
+    package:
+           name: gvim
+           state: latest
+
+  - name: install dolphin file manager
+    package:
+         name: dolphin
+         state: latest
+

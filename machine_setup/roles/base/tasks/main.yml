@@ -1,0 +1,49 @@
+# basic stuff for all machines
+
+  - name: install iw
+    package: name=iw state=latest
+ 
+  - name: install wpa_supplicant
+    package:
+            name: wpa_supplicant
+            state: latest
+ 
+  - name: install intel-ucode
+    package:
+           name:  intel-ucode
+           state: latest
+ 
+  - name: install grub
+    package:
+           name: grub
+           state: latest
+ 
+  - name: install sudo
+    package:
+         name: sudo
+         state: latest
+
+  - name: install reflector
+    package:
+            name: reflector
+            state: latest
+  
+  - name: install git
+    package:
+           name: git
+           state: latest
+
+  - name: install btrfs-progs
+    package:
+           name: btrfs-progs
+           state: latest
+
+  - name: get back to old school NIC naming
+    file:
+            src: /dev/null
+            dest: /etc/udev/rules.d/80-net-setup-link.rules 
+            state: link
+  - name: disable sleep on lid closed
+    copy:
+            src: logind.conf
+            dest: /etc/systemd/logind.conf

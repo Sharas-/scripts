@@ -4,12 +4,12 @@ dhcpcd -x wlan0;
 if [ "$#" == '2' ]
 then
 	echo "--- using SSID $1 with password $2 ---";
-	wpa_passphrase "$1" "$2" > ~/pass.txt
+	wpa_passphrase "$1" "$2" > ~/wpa.conf
 fi
 
 if [ "$#" == '0' ]
 then
-	echo "--- using $(cat ~/pass.txt) ---"
+	echo "--- using $(cat ~/wpa.conf) ---"
 fi
 
 wpa_supplicant -i wlan0 -B -c wpa.conf & 

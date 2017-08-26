@@ -1,0 +1,7 @@
+- name: setup for my machine
+  hosts: [localhost]
+  
+  roles:
+          - base
+          - gui
+
