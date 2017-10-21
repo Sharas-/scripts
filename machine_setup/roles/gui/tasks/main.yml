@@ -50,3 +50,7 @@
          name: dolphin
          state: latest
 
+  - name: install ark archive manager
+    package:
+         name: ark
+         state: latest

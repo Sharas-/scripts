@@ -43,7 +43,9 @@
             src: /dev/null
             dest: /etc/udev/rules.d/80-net-setup-link.rules 
             state: link
+
   - name: disable sleep on lid closed
     copy:
             src: logind.conf
             dest: /etc/systemd/logind.conf
+

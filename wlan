@@ -1,16 +1,36 @@
-pkill wpa_supplicant;
-dhcpcd -x wlan0;
+#!/bin/bash
+
+if [ "$#" == '0' ]
+then
+	echo 'usage: wlan <SSID> [password]' 1>&2
+	exit 1
+fi
+
+ip link set wlan0 down
+ip link set wlan0 up
+dhcpcd -x wlan0
+pkill wpa_supplicant -e;
+
+function make_resume()
+{
+	echo -e "#!/bin/bash\n$(which $0) $1" > $HOME/bin/resumewifi
+}
+
+if [ "$#" == '1' ]
+then
+	echo "--- using SSID $1 ---" 
+	iw dev wlan0 connect "$1" &&\
+	params="'$1'"	
+fi
 
 if [ "$#" == '2' ]
 then
 	echo "--- using SSID $1 with password $2 ---";
-	wpa_passphrase "$1" "$2" > ~/wpa.conf
+	wpa_supplicant -i wlan0 -B -c <(wpa_passphrase "$1" "$2") &&\
+	params="'$1' '$2'"	
 fi
 
-if [ "$#" == '0' ]
-then
-	echo "--- using $(cat ~/wpa.conf) ---"
-fi
+dhcpcd wlan0 && make_resume $params
 
-wpa_supplicant -i wlan0 -B -c wpa.conf & 
-dhcpcd wlan0
+
+
