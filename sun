@@ -1,0 +1,15 @@
+#! /bin/bash
+
+SETTING_FILE="/sys/class/backlight/intel_backlight/brightness"
+PERCENT_UNIT=15
+
+if [ $# -eq 1 ]
+then
+	DEFAULT_PERCENT=50
+	PERCENT=${1:-$DEFAULT_PERCENT}
+	BRIGHTNESS=$((PERCENT_UNIT*PERCENT))
+	sudo bash -c "echo $BRIGHTNESS > $SETTING_FILE"
+fi
+
+SUN_NOW=$(( $(sudo cat $SETTING_FILE) / $PERCENT_UNIT ))
+echo "brightness: ${SUN_NOW}%"

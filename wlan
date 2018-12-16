@@ -13,7 +13,7 @@ pkill wpa_supplicant -e;
 
 function make_resume()
 {
-	echo -e "#!/bin/bash\n$(which $0) $1" > $HOME/bin/resumewifi
+	echo -e "#!/bin/bash\n$(which $0) $1" > /home/sharas/bin/resumewifi
 }
 
 if [ "$#" == '1' ]
@@ -30,7 +30,4 @@ then
 	params="'$1' '$2'"	
 fi
 
-dhcpcd wlan0 && make_resume $params
-
-
-
+dhcpcd wlan0 && make_resume "$params"
