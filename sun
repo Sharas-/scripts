@@ -2,11 +2,17 @@
 
 SETTING_FILE="/sys/class/backlight/intel_backlight/brightness"
 PERCENT_UNIT=15
+MIN_PERCENT=20
 
 if [ $# -eq 1 ]
 then
 	DEFAULT_PERCENT=50
 	PERCENT=${1:-$DEFAULT_PERCENT}
+    if (( $PERCENT < $MIN_PERCENT))
+    then
+        echo "Refusing to set brightness to ${PERCENT}%. Are you an owl? It's ${MIN_PERCENT}% minimum for humans."
+        exit 1
+    fi
 	BRIGHTNESS=$((PERCENT_UNIT*PERCENT))
 	sudo bash -c "echo $BRIGHTNESS > $SETTING_FILE"
 fi
