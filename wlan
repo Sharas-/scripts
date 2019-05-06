@@ -8,7 +8,7 @@ fi
 
 ip link set wlan0 down
 ip link set wlan0 up
-dhcpcd -x wlan0
+pkill dhcpcd -e
 pkill wpa_supplicant -e;
 
 function make_resume()
@@ -30,4 +30,4 @@ then
 	params="'$1' '$2'"	
 fi
 
-dhcpcd wlan0 && make_resume "$params"
+dhcpcd wlan0 -4 --timeout 60 && make_resume "$params"
